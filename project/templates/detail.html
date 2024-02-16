@@ -1,0 +1,31 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% block content %}
+{% if post %}
+    <hr>
+        <table width="100%" style="margin-top: 35px">
+            <tr>
+                <td>НАЗВАНИЕ</td>
+                <td>ДАТА ПУБЛИКАЦИИ</td>
+                <td>ОПИСАНИЕ</td>
+                <td>КАТЕГОРИЯ</td>
+            </tr>
+            <tr>
+                <td>{{ post.title }}</td>
+                <td>{{ post.date_create|date:'d M Y' }}</td>
+                <td>{{ post.text|censor }}</td>
+                {% for cat in post.post_category.all %}
+                <td>{{ cat.name }}</td>
+                {% endfor %}
+            </tr>
+        </table>
+    <hr>
+    {% else %}
+        <h2>ПУБЛИКАЦИЙ НЕТ!</h2>
+
+    {% endif %}
+{% endblock content %}
+
+
